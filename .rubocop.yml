@@ -10,6 +10,9 @@ Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
   Exclude:
     - 'Guardfile'
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'spec/dummy/db/**/*'
 
 AllCops:
   TargetRubyVersion: 2.6.5
@@ -20,6 +23,7 @@ AllCops:
     - 'bin/test'
     - 'spec/dummy/bin/*'
     - 'spec/dummy/Rakefile'
+    - 'spec/dummy/db/schema.rb'
 
 # Pending Cops
 Lint/RaiseException:

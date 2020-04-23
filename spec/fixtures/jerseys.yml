@@ -1,0 +1,9 @@
+<% 1.upto(10) do |i| %>
+home_jersey_<%= i %>:
+  number: <%= i %>
+  home: true
+
+away_jersey_<%= i %>:
+  number: <%= i %>
+  home: false
+<% end %>
