@@ -1,0 +1,38 @@
+inherit_from:
+  - .rubocop_system.yml
+inherit_mode:
+  merge:
+    - Exclude
+
+Layout/LineLength:
+  Max: 120
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+  Exclude:
+    - 'Guardfile'
+
+AllCops:
+  TargetRubyVersion: 2.6.5
+  Exclude:
+    - 'next_page.gemspec'
+    - 'Rakefile'
+    - 'lib/next_page/version.rb'
+    - 'bin/test'
+    - 'spec/dummy/bin/*'
+    - 'spec/dummy/Rakefile'
+
+# Pending Cops
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true

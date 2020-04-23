@@ -31,4 +31,3 @@ module Dummy
     config.api_only = true
   end
 end
-
