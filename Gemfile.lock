@@ -219,10 +219,10 @@ DEPENDENCIES
   guard-rspec (~> 4.7)
   guard-rubocop (~> 1.3.0)
   next_page!
-  pg
+  pg (~> 1.2.3)
   rspec-rails (~> 3.9)
   rubocop (~> 0.77)
-  simplecov
+  simplecov (~> 0.18)
 
 BUNDLED WITH
    1.17.3
