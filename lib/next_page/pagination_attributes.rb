@@ -15,7 +15,7 @@ module NextPage
     end
 
     def total_pages
-      @total_pages ||= unscope(:limit).count / per_page
+      @total_pages ||= unscope(:limit).unscope(:offset).count / per_page
     end
 
     def per_page

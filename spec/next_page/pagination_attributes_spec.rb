@@ -14,7 +14,7 @@ RSpec.describe NextPage::PaginationAttributes do
   end
 
   context 'with offset 3' do
-    let(:relation) { Jersey.offset(3) }
+    let(:relation) { Jersey.offset(3).limit(5) }
 
     it '#current_page' do
       expect(instance.current_page).to eq 4
@@ -22,6 +22,10 @@ RSpec.describe NextPage::PaginationAttributes do
 
     it '#next_page' do
       expect(instance.next_page).to eq 5
+    end
+
+    it '#total_pages' do
+      expect(instance.total_pages).to eq 4
     end
   end
 end
