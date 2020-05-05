@@ -73,7 +73,8 @@ module NextPage
       options = args.first
       return super unless options.is_a?(Hash) && options.key?(:json)
 
-      options[:meta] = options.fetch(:meta, {}).merge!(total_pages: options[:json].total_pages)
+      options[:meta] = options.fetch(:meta, {}).merge!(total_pages: options[:json].total_pages,
+                                                       total_count: options[:json].total_count)
       super
     end
   end
