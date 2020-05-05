@@ -6,7 +6,11 @@ RSpec.describe NextPage::PaginationAttributes do
   let(:instance) { relation.tap { |cp| cp.extend(described_class) } }
 
   context 'with limit 5' do
-    let(:relation) { Jersey.limit(5) }
+    let(:relation) { Jersey.limit(6) }
+
+    it '#total_count' do
+      expect(instance.total_count).to eq 20
+    end
 
     it '#total_pages' do
       expect(instance.total_pages).to eq 4
