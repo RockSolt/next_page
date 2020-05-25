@@ -43,6 +43,18 @@ resource:
 @photos = paginate_resource(@photos)
 ```
 
+### Sorting
+Requests can specify sort order using the parameter `sort` with an attribute name, scope, or nested attribute. Attributes and nested attributes can be prefixed with `+` or `-` to indicate ascending or descending. Multiple sorts can be specified either as a comma separated list or via bracket notation.
+
+    /photos?sort=-created_at
+    /photos?sort=location,-created_by
+    /photos?sort[]=location&photos[]=-created_by
+
+The default sort order is primary key descending. It can be overridden by using the `default_sort` option of `paginate_with`. Use a string formatted just as url parameter would be formatted.
+
+```ruby
+paginate_with default_sort: '-created_at'
+```
 
 ### Default Limit
 The default size limit can be overridden with the `paginate_with` method for either type of paginagion. Pass option

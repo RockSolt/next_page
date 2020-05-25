@@ -25,5 +25,15 @@ RSpec.describe UniformsController, type: :controller do
       get :index, params: { page: { size: 12, number: 2 } }
       expect(JSON.parse(response.body).size).to eq 8
     end
+
+    it 'sorts by specified default' do
+      get :index, params: {}
+      expect(JSON.parse(response.body).first['number']).to eq 5
+    end
+
+    it 'allows default sort to be overridden' do
+      get :index, params: { sort: 'number' }
+      expect(JSON.parse(response.body).first['number']).to eq 1
+    end
   end
 end

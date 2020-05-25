@@ -52,19 +52,20 @@ module NextPage
       # - instance_variable_name: explicitly name the variable if it does not follow the convention
       # - model_class: explicitly specify the model name if it does not follow the convention
       # - default_limit: specify an alternate default
-      def paginate_with(instance_variable_name: nil, model_class: nil, default_limit: nil)
-        next_page_paginator.paginate_with(instance_variable_name, model_class, default_limit)
+      # - default_sort: sort parameter if none provided, use same format as url: created_at OR -updated_at
+      def paginate_with(instance_variable_name: nil, model_class: nil, default_limit: nil, default_sort: nil)
+        next_page_paginator.paginate_with(instance_variable_name, model_class, default_limit, default_sort)
       end
     end
 
     # Called with before_action in order to automatically paginate the resource.
     def apply_next_page_pagination
-      self.class.next_page_paginator.paginate(self, params[:page])
+      self.class.next_page_paginator.paginate(self, params.slice(:page, :sort))
     end
 
     # Invokes pagination directly, the result must be stored as the resource itself is not modified.
     def paginate_resource(resource)
-      self.class.next_page_paginator.paginate_resource(resource, params[:page])
+      self.class.next_page_paginator.paginate_resource(resource, params.slice(:page, :sort))
     end
 
     def render(*args) #:nodoc:

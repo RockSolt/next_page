@@ -22,10 +22,11 @@ module NextPage
       @default_limit = DEFAULT_LIMIT
     end
 
-    def paginate_with(instance_variable_name, model_class, default_limit)
+    def paginate_with(instance_variable_name, model_class, default_limit, default_sort)
       @default_limit = default_limit if default_limit.present?
       @instance_variable_name = instance_variable_name
       @model_class = model_class.is_a?(String) ? model_class.constantize : model_class
+      @default_sort = default_sort
     end
 
     def paginate(controller, page_params)
@@ -35,11 +36,13 @@ module NextPage
       controller.instance_variable_set(name, paginate_resource(data, page_params))
     end
 
-    def paginate_resource(data, page_params)
+    def paginate_resource(data, params)
       data.extend(NextPage::PaginationAttributes)
 
-      limit = page_size(page_params)
-      offset = page_number(page_params) - 1
+      data = sorter.sort(data, params.fetch(:sort, default_sort))
+
+      limit = page_size(params[:page])
+      offset = page_number(params[:page]) - 1
       data.limit(limit).offset(offset * limit)
     end
 
@@ -53,6 +56,10 @@ module NextPage
 
     def instance_variable_name
       @instance_variable_name ||= @controller_name
+    end
+
+    def default_sort
+      @default_sort ||= "-#{@model_class.primary_key}"
     end
 
     def page_size(page)
@@ -69,6 +76,10 @@ module NextPage
       else
         1
       end
+    end
+
+    def sorter
+      @sorter ||= NextPage::Sorter.new(model_class)
     end
   end
 end

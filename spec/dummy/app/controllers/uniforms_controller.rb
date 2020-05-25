@@ -4,7 +4,7 @@ class UniformsController < ApplicationController
   include NextPage::Pagination
   before_action :apply_next_page_pagination, only: :index
 
-  paginate_with instance_variable_name: :unis, model_class: 'Jersey', default_limit: 8
+  paginate_with instance_variable_name: :unis, model_class: 'Jersey', default_limit: 8, default_sort: '-number'
 
   # GET /uniforms
   def index
