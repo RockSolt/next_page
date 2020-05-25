@@ -21,6 +21,10 @@ guard :rspec, cmd: 'bundle exec rspec' do
   # Rails config changes
   watch(rails.spec_helper) { rspec.spec_dir }
   watch('spec/dummy/app/controllers/application_controller.rb') { "#{rspec.spec_dir}/controllers" }
+
+  # main files, run all tests
+  watch('lib/next_page/pagination.rb') { rspec.spec_dir }
+  watch('lib/next_page/paginator.rb') { rspec.spec_dir }
 end
 
 guard :rubocop, cli: %w[--display-cop-names --safe-auto-correct] do
