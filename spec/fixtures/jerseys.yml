@@ -1,9 +1,13 @@
-<% 1.upto(10) do |i| %>
-home_jersey_<%= i %>:
+<% %i[bears aardvarks].each do |team| %>
+<% 1.upto(5) do |i| %>
+home_jersey_<%= "#{team}_#{i}" %>:
+  team: <%= team %>
   number: <%= i %>
   home: true
 
-away_jersey_<%= i %>:
+away_jersey_<%= "#{team}_#{i}" %>:
+  team:  <%= team %>
   number: <%= i %>
   home: false
+<% end %>
 <% end %>
