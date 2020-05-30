@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/next_page.svg)](https://badge.fury.io/rb/next_page)
+
 # NextPage
 Basic pagination for Rails controllers.
 
