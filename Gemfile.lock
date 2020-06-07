@@ -221,7 +221,7 @@ DEPENDENCIES
   next_page!
   pg (~> 1.2.3)
   rspec-rails (~> 3.9)
-  rubocop (~> 0.77)
+  rubocop (~> 0.82.0)
   simplecov (~> 0.18)
 
 BUNDLED WITH
