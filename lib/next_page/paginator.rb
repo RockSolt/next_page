@@ -37,13 +37,10 @@ module NextPage
     end
 
     def paginate_resource(data, params)
-      data.extend(NextPage::PaginationAttributes)
+      assign_pagination_attributes(data, params)
 
       data = sorter.sort(data, params.fetch(:sort, default_sort))
-
-      limit = page_size(params[:page])
-      offset = page_number(params[:page]) - 1
-      data.limit(limit).offset(offset * limit)
+      data.limit(data.per_page).offset((data.current_page - 1) * data.per_page)
     end
 
     private
@@ -60,6 +57,12 @@ module NextPage
 
     def default_sort
       @default_sort ||= "-#{@model_class.primary_key}"
+    end
+
+    def assign_pagination_attributes(data, params)
+      data.extend(NextPage::PaginationAttributes)
+      data.per_page = page_size(params[:page])
+      data.current_page = page_number(params[:page])
     end
 
     def page_size(page)
