@@ -32,6 +32,7 @@ module NextPage
       @per_page ||= count_query.limit_value
     end
 
+    # checks first to see if an override query has been provided, then fails back to self
     def count_query
       @count_query || self
     end
