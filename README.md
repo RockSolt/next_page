@@ -75,11 +75,17 @@ paginate_with default_limit: 12, instance_variable_name: 'data'
 ```
 
 ### Link Helpers
-This gem does not do any rendering. It does provide helper methods for generating links. The resource will include the following additional methods:
+This gem does not do any rendering. It does provide helper methods for generating links. The resource will include the following additional methods (when the request header Accept is `'application/vnd.api+json'`):
 - current_page
 - next_page
 - total_pages
 - per_page
+
+#### Count Query
+In some cases (such as grouping), calling count on the query does not provide an accurate representation. If that is the case, then there are two ways to override the default behavior:
+- provide a count_query that can resolve the attributes
+- specify the following attributes manually: current_page, total_count, and per_page
+
 
 ## Installation
 Add this line to your application's Gemfile:
