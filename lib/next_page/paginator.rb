@@ -43,6 +43,14 @@ module NextPage
       data.limit(data.per_page).offset((data.current_page - 1) * data.per_page)
     end
 
+    def decorate_meta!(options)
+      return unless options.is_a?(Hash) && options.key?(:json) && !options[:json].is_a?(Hash)
+
+      resource = options[:json]
+      options[:meta] = options.fetch(:meta, {}).merge!(total_pages: resource.total_pages,
+                                                       total_count: resource.total_count)
+    end
+
     private
 
     def model_class
