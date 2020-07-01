@@ -71,11 +71,9 @@ module NextPage
     def render(*args) #:nodoc:
       return super unless action_name == 'index' && request.headers[:Accept] == 'application/vnd.api+json'
 
-      options = args.first
-      return super unless options.is_a?(Hash) && options.key?(:json)
-
-      options[:meta] = options.fetch(:meta, {}).merge!(total_pages: options[:json].total_pages,
-                                                       total_count: options[:json].total_count)
+      self.class.next_page_paginator.decorate_meta!(args.first)
+      super
+    rescue StandardError
       super
     end
   end

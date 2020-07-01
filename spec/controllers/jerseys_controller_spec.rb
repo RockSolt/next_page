@@ -75,6 +75,18 @@ RSpec.describe JerseysController, type: :controller do
       expect { get :index, params: { sort: 'team.mascot.color' } }
         .to raise_exception NextPage::Exceptions::InvalidNestedSort
     end
+
+    it 'with authentication error on json api request' do
+      request.headers.merge!({ Accept: 'application/vnd.api+json' })
+      get :index, params: { throw_auth_error: true }
+      expect(JSON.parse(response.body)).to eq({ error: 'not authorized', status: 401 }.as_json)
+    end
+
+    it 'with non-ActiveRecord response on json api request' do
+      request.headers.merge!({ Accept: 'application/vnd.api+json' })
+      get :index, params: { contrived_array_example: true }
+      expect(JSON.parse(response.body)).to eq([1, 2, 3])
+    end
   end
 
   describe 'calling paginate_resource directly' do
