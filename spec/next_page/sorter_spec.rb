@@ -90,4 +90,33 @@ RSpec.describe NextPage::Sorter do
       expect { query.explain }.not_to raise_exception, "Invalid SQL: #{query.to_sql}"
     end
   end
+
+  context 'with nested scope' do
+    it 'team.popular_names' do |x|
+      query = sorter.sort(Jersey, x.description)
+      expect(query.joins_values).to contain_exactly(:team)
+      expect(query.to_sql).to include Team.arel_table['name'].desc.to_sql
+      expect { query.explain }.not_to raise_exception, "Invalid SQL: #{query.to_sql}"
+    end
+  end
+
+  context 'with nested directional scope' do
+    it 'home_numbers' do |x|
+      query = sorter.sort(Jersey, x.description)
+      expect(query.to_sql).to include Jersey.arel_table['number'].asc.to_sql
+      expect { query.explain }.not_to raise_exception, "Invalid SQL: #{query.to_sql}"
+    end
+
+    it '+home_numbers' do |x|
+      query = sorter.sort(Jersey, x.description)
+      expect(query.to_sql).to include Jersey.arel_table['number'].asc.to_sql
+      expect { query.explain }.not_to raise_exception, "Invalid SQL: #{query.to_sql}"
+    end
+
+    it '-home_numbers' do |x|
+      query = sorter.sort(Jersey, x.description)
+      expect(query.to_sql).to include Jersey.arel_table['number'].desc.to_sql
+      expect { query.explain }.not_to raise_exception, "Invalid SQL: #{query.to_sql}"
+    end
+  end
 end
