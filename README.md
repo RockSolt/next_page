@@ -47,7 +47,7 @@ resource:
 ```
 
 ### Sorting
-Requests can specify sort order using the parameter `sort` with an attribute name, scope, or nested attribute. Attributes and nested attributes can be prefixed with `+` or `-` to indicate ascending or descending. Multiple sorts can be specified either as a comma separated list or via bracket notation.
+Requests can specify sort order using the parameter `sort` with an attribute name or scope. Sorts can be prefixed with `+` or `-` to indicate ascending or descending. Multiple sorts can be specified either as a comma separated list or via bracket notation.
 
     /photos?sort=-created_at
     /photos?sort=location,-created_by
@@ -58,6 +58,41 @@ The default sort order is primary key descending. It can be overridden by using 
 ```ruby
 paginate_with default_sort: '-created_at'
 ```
+
+#### Nested Sorts
+
+Nested attributes and scopes can be indicated by providing the association names separated by periods.
+
+    /photos?sort=user.name
+    /photos?sort=-user.address.state
+
+#### Directional Scope Sorts
+
+In order to use directions (`+` or `-`) with a scope, the scope must be defined as a class method and take a single parameter. The scope will receive either `'asc'` or `'desc'`. Here is an example of a valid directional scope.
+
+```ruby
+def self.status(direction)
+  order("CASE status WHEN 'new' THEN 1 WHEN 'in progress' THEN 2 ELSE 3 END #{direction}")
+end
+```
+
+#### Scope Prefix / Suffix
+
+In order to keep the peace between frontend and backend developers, scope names can include a prefix or suffix that the front end can ignore. For example, given a scope that sorts on a derived attribute (such as status in the _Direction Scope Sorts_ example), the backend developer might prefer to name the scope status_sort or sort_by_status, as a class method that shares the same name as an attribute might be unclear. However, the frontend developer does not want a query parameter that says <tt>sort=sort_by_status</tt>; it is an exception because it doesn't match the name of the attribute (and it's not pretty).
+
+The configuration allows a prefix and or suffix to be specified. If either is specified, then in addition to looking for a scope that matches the parameter name, it will also look for a scope that matches the prefixed and/or suffixed name. Prefixes are defined by configuration option <tt>sort_scope_prefix</tt> and suffixes are defined by <tt>sort_scope_suffix</tt>.
+
+For example, if the backend developer prefers <tt>sort_by_status</tt> then the following configuration can be used:
+
+```ruby
+NextPage.configure do |config|
+  config.sort_scope_prefix = 'sort_by_'
+end
+``` 
+This allows the query parameter to be the following:
+
+    sort=status
+
 
 ### Default Limit
 The default size limit can be overridden with the `paginate_with` method for either type of paginagion. Pass option
