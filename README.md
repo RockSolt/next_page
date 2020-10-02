@@ -1,5 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/next_page.svg)](https://badge.fury.io/rb/next_page)
 [![RuboCop](https://github.com/RockSolt/next_page/workflows/RuboCop/badge.svg)](https://github.com/RockSolt/next_page/actions?query=workflow%3ARuboCop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0efe1a9b66a0bf161536/maintainability)](https://codeclimate.com/github/RockSolt/next_page/maintainability)
 
 # NextPage
 Basic pagination for Rails controllers.
