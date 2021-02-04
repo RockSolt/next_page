@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    next_page (0.1.7)
+    next_page (0.1.8)
       rails (~> 6.0, >= 6.0.2.2)
 
 GEM
