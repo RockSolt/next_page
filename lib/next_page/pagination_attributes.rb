@@ -3,8 +3,8 @@
 module NextPage
   # = Pagination Attributes
   #
-  # Module PaginationAttributes adds in methods required for pagination links: current_page, next_page, and total_pages.
-  # It reads the offset and limit on the query to determine the values.
+  # Module PaginationAttributes adds in methods required for pagination links: previous_page, current_page, next_page,
+  # and total_pages. It reads the offset and limit on the query to determine the values.
   #
   # In some cases the query will not support count. In that case, there are two ways to override the default behavior:
   # - provide a count_query that can resolve the attributes
@@ -12,12 +12,16 @@ module NextPage
   module PaginationAttributes
     attr_writer :count_query, :current_page, :total_count, :per_page
 
+    def previous_page
+      current_page > 1 ? current_page - 1 : nil
+    end
+
     def current_page
-      @current_page ||= count_query.offset_value + 1
+      @current_page ||= (count_query.offset_value || 0) + 1
     end
 
     def next_page
-      current_page + 1
+      total_pages > current_page ? current_page + 1 : nil
     end
 
     def total_count
