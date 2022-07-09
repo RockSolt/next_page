@@ -3,4 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe NextPage::Paginator do
+  # TODO: add tests
 end

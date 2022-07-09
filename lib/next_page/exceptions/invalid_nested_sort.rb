@@ -7,10 +7,7 @@ module NextPage
       def initialize(model, association)
         @model = model
         @association = association
-      end
-
-      def message
-        "Invalid nested sort: Unable to find association #{@association} on model #{@model}"
+        super("Invalid nested sort: Unable to find association #{@association} on model #{@model}")
       end
     end
   end

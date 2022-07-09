@@ -44,7 +44,7 @@ module NextPage
     extend ActiveSupport::Concern
 
     class_methods do
-      def next_page_paginator #:nodoc:
+      def next_page_paginator # :nodoc:
         @next_page_paginator ||= NextPage::Paginator.new(controller_name, controller_path)
       end
 
@@ -68,7 +68,7 @@ module NextPage
       self.class.next_page_paginator.paginate_resource(resource, params.slice(:page, :sort))
     end
 
-    def render(*args) #:nodoc:
+    def render(*args) # :nodoc:
       return super unless action_name == 'index' && request.headers[:Accept] == 'application/vnd.api+json'
 
       self.class.next_page_paginator.decorate_meta!(args.first)
