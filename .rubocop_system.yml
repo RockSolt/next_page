@@ -37,9 +37,17 @@ Style/Documentation:
     - 'spec/dummy/app/models/application_record.rb'
     - 'spec/dummy/config/application.rb'
 
+Style/GlobalStdStream:
+  Exclude:
+    - 'spec/dummy/config/environments/production.rb'
+
 Style/StringLiterals:
   Exclude:
     - 'spec/dummy/config/application.rb'
     - 'spec/dummy/config/puma.rb'
     - 'spec/dummy/config/spring.rb'
     - 'spec/rails_helper.rb'
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - 'spec/dummy/config/puma.rb'

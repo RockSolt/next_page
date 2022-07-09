@@ -27,7 +27,7 @@ guard :rspec, cmd: 'bundle exec rspec' do
   watch('lib/next_page/paginator.rb') { rspec.spec_dir }
 end
 
-guard :rubocop, cli: %w[--display-cop-names --safe-auto-correct] do
+guard :rubocop, cli: %w[--display-cop-names --autocorrect] do
   watch(/.+\.rb$/)
   watch(%r{(?:.+/)?\.rubocop(?:_todo)?\.yml$}) { |m| File.dirname(m[0]) }
 end
