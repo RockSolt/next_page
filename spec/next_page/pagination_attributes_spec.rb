@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe NextPage::PaginationAttributes do
+  fixtures :jerseys
+
   let(:instance) { relation.tap { |cp| cp.extend(described_class) } }
 
   context 'with limit 5' do
