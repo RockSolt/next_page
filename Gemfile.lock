@@ -232,7 +232,7 @@ DEPENDENCIES
   pg (~> 1.2.3)
   rspec-rails (~> 5.1.2)
   rubocop (~> 1.31.2)
-  simplecov
+  simplecov (~> 0.18)
 
 BUNDLED WITH
    2.3.17
