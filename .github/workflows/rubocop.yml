@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Set up Ruby 2.6
+      - name: Set up Ruby 2.7
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          ruby-version: 2.7
       - name: Install RuboCop
         run: |
           gem install bundler --no-document
-          gem install rubocop -v 0.82 --no-document
+          gem install rubocop -v 1.31.2 --no-document
       - name: RuboCop
         run: rubocop
