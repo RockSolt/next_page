@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 6.0", ">= 6.0.2.2"
 
-  spec.add_development_dependency "guard", "~> 2.16"
-  spec.add_development_dependency "guard-rspec", "~> 4.7"
-  spec.add_development_dependency "guard-rubocop", "~> 1.3.0"
+  spec.add_development_dependency "guard", "~> 2.18.0"
+  spec.add_development_dependency "guard-rspec", "~> 4.7.3"
+  spec.add_development_dependency "guard-rubocop", "~> 1.5.0"
   spec.add_development_dependency "pg", "~> 1.2.3"
-  spec.add_development_dependency "rspec-rails", "~> 3.9"
-  spec.add_development_dependency "rubocop", "~> 0.82.0"
+  spec.add_development_dependency "rspec-rails", "~> 5.1.2"
+  spec.add_development_dependency "rubocop", "~> 1.31.2"
   spec.add_development_dependency "simplecov", "~> 0.18"
 end

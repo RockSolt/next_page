@@ -7,7 +7,7 @@ inherit_mode:
 Layout/LineLength:
   Max: 120
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context']
+  IgnoredMethods: ['describe', 'context']
   Exclude:
     - 'Guardfile'
 Style/FrozenStringLiteralComment:
@@ -15,7 +15,8 @@ Style/FrozenStringLiteralComment:
     - 'spec/dummy/db/**/*'
 
 AllCops:
-  TargetRubyVersion: 2.6.5
+  TargetRubyVersion: 2.7.6
+  NewCops: enable
   Exclude:
     - 'next_page.gemspec'
     - 'Rakefile'
@@ -24,19 +25,3 @@ AllCops:
     - 'spec/dummy/bin/*'
     - 'spec/dummy/Rakefile'
     - 'spec/dummy/db/schema.rb'
-
-# Pending Cops
-Lint/RaiseException:
-  Enabled: true
-Lint/StructNewOverride:
-  Enabled: true
-Style/HashEachMethods:
-  Enabled: true
-Style/HashTransformKeys:
-  Enabled: true
-Style/HashTransformValues:
-  Enabled: true
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-Style/ExponentialNotation:
-  Enabled: true
