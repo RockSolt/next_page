@@ -19,6 +19,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - 'next_page.gemspec'
+    - 'gemfiles/*'
     - 'Rakefile'
     - 'lib/next_page/version.rb'
     - 'bin/test'
