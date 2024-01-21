@@ -8,7 +8,7 @@ module NextPage
     class SegmentParser
       attr_reader :direction, :associations, :name
 
-      SEGMENT_REGEX = /(?<sign>[+|-]?)(?<names>.+)/.freeze
+      SEGMENT_REGEX = /(?<sign>[+|-]?)(?<names>.+)/
 
       def initialize(segment)
         @segment = segment

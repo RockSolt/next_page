@@ -13,9 +13,11 @@ Metrics/BlockLength:
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'spec/dummy/db/**/*'
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
 
 AllCops:
-  TargetRubyVersion: 2.7.6
+  TargetRubyVersion: 3.2.2
   NewCops: enable
   Exclude:
     - 'next_page.gemspec'
