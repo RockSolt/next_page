@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     next_page (0.1.8)
-      rails (>= 5.2.2)
+      rails (>= 6.1.7)
 
 GEM
   remote: https://rubygems.org/
@@ -72,7 +72,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    appraisal (2.4.1)
+    appraisal (2.5.0)
       bundler
       rake
       thor (>= 0.14.0)
@@ -147,7 +147,7 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
-    pg (1.2.3)
+    pg (1.5.4)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -243,12 +243,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  appraisal (~> 2.4.1)
+  appraisal (~> 2.5.0)
   guard (~> 2.18.0)
   guard-rspec (~> 4.7.3)
   guard-rubocop (~> 1.5.0)
   next_page!
-  pg (~> 1.2.3)
+  pg (~> 1.5.4)
   rspec-rails (~> 5.1.2)
   rubocop (~> 1.31.2)
   simplecov (~> 0.18)
