@@ -7,7 +7,7 @@
 Basic pagination for Rails controllers.
 
 ## Usage
-Module Pagination provides pagination for index methods. It assigns a limit and offset to the resource query and extends the relation with mixin NextPage::PaginationAttributes to provide helper methods for generating links.
+Module Pagination provides pagination controllers. It assigns a limit and offset to the resource query and extends the relation with mixin NextPage::PaginationAttributes to provide helper methods for generating links.
 
 ### Include the Module
 Add an include statement for the module into any controller that needs pagination:
@@ -16,31 +16,8 @@ Add an include statement for the module into any controller that needs paginatio
 include NextPage::Pagination
 ```
 
-There are two ways to paginate: using a before filter or by calling `paginate_resource` explicitly.
+### Invoking Pagination
 
-### Before Filter
-Here's an example of using the before filter in a controller:
-
-```ruby
-before_action :apply_next_page_pagination, only: :index
-```
-
-This entry point uses the following conventions to apply pagination:
-- the name of the instance variable is the sames as the component (for example PhotosController -> @photos)
-- the name of the models is the controller name singularized (for example PhotosController -> Photo)
-
-Either can be overridden by calling method `paginate_with` in the controller. The two override options are
-`instance_variable_name` and `model_class`. For example, if the PhotosController used the model Picture and the
-instance variable name @photographs, the controller declares it as follows:
-
-```ruby
-paginate_with instance_variable_name: :photographs, model_class: 'Picture'
-```
-
-If the before filter is used, it will populate an instance variable. The action should NOT reset the variable, as
-that removes pagination.
-
-### Invoking Pagination Directly
 To paginate a resource pass the resource into method `paginate_resource` then store the return value back in the
 resource:
 
@@ -48,67 +25,14 @@ resource:
 @photos = paginate_resource(@photos)
 ```
 
-### Sorting
-Requests can specify sort order using the parameter `sort` with an attribute name or scope. Sorts can be prefixed with `+` or `-` to indicate ascending or descending. Multiple sorts can be specified either as a comma separated list or via bracket notation.
+The resource is decorated, so this should be the last step.
 
-    /photos?sort=-created_at
-    /photos?sort=location,-created_by
-    /photos?sort[]=location&photos[]=-created_by
+### Default Results per Page
 
-The default sort order is primary key descending. It can be overridden by using the `default_sort` option of `paginate_with`. Use a string formatted just as url parameter would be formatted.
+The default number of results per page can be overridden by specifying a new default with the call:
 
 ```ruby
-paginate_with default_sort: '-created_at'
-```
-
-#### Nested Sorts
-
-Nested attributes and scopes can be indicated by providing the association names separated by periods.
-
-    /photos?sort=user.name
-    /photos?sort=-user.address.state
-
-#### Directional Scope Sorts
-
-In order to use directions (`+` or `-`) with a scope, the scope must be defined as a class method and take a single parameter. The scope will receive either `'asc'` or `'desc'`. Here is an example of a valid directional scope.
-
-```ruby
-def self.status(direction)
-  order("CASE status WHEN 'new' THEN 1 WHEN 'in progress' THEN 2 ELSE 3 END #{direction}")
-end
-```
-
-#### Scope Prefix / Suffix
-
-In order to keep the peace between frontend and backend developers, scope names can include a prefix or suffix that the front end can ignore. For example, given a scope that sorts on a derived attribute (such as status in the _Direction Scope Sorts_ example), the backend developer might prefer to name the scope status_sort or sort_by_status, as a class method that shares the same name as an attribute might be unclear. However, the frontend developer does not want a query parameter that says <tt>sort=sort_by_status</tt>; it is an exception because it doesn't match the name of the attribute (and it's not pretty).
-
-The configuration allows a prefix and or suffix to be specified. If either is specified, then in addition to looking for a scope that matches the parameter name, it will also look for a scope that matches the prefixed and/or suffixed name. Prefixes are defined by configuration option <tt>sort_scope_prefix</tt> and suffixes are defined by <tt>sort_scope_suffix</tt>.
-
-For example, if the backend developer prefers <tt>sort_by_status</tt> then the following configuration can be used:
-
-```ruby
-NextPage.configure do |config|
-  config.sort_scope_prefix = 'sort_by_'
-end
-``` 
-This allows the query parameter to be the following:
-
-    sort=status
-
-
-### Default Limit
-The default size limit can be overridden with the `paginate_with` method for either type of paginagion. Pass option
-`default_limit` to specify an override:
-
-```ruby
-paginate_with default_limit: 25
-```
-
-All the options can be mixed and matches when calling `paginate_with`:
-
-```ruby
-paginate_with model_class: 'Photo', default_limit: 12
-paginate_with default_limit: 12, instance_variable_name: 'data'
+@photos = paginate_resource(@photos, default_limit: 25)
 ```
 
 ### Link Helpers
@@ -123,6 +47,26 @@ In some cases (such as grouping), calling count on the query does not provide an
 - provide a count_query that can resolve the attributes
 - specify the following attributes manually: current_page, total_count, and per_page
 
+
+## Configuration
+
+There is one configuration option: `per_page`.
+
+The option can be set directly...
+
+`NextPage.configuration.per_page = 25`
+
+...or the configuration can be yielded:
+
+```
+NextPage.configure do |config|
+  config.per_page = 25
+end
+```
+
+**Results per Page**
+
+If not specified in the configuration, the default value for results per page is 12.
 
 ## Installation
 Add this line to your application's Gemfile:
