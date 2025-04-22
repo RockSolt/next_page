@@ -7,7 +7,7 @@
 Basic pagination for Rails controllers.
 
 ## Usage
-Module Pagination provides pagination for index methods. It assigns a limit and offset to the resource query and extends the relation with mixin NextPage::PaginationAttributes to provide helper methods for generating links.
+Module Pagination provides pagination controllers. It assigns a limit and offset to the resource query and extends the relation with mixin NextPage::PaginationAttributes to provide helper methods for generating links.
 
 ### Include the Module
 Add an include statement for the module into any controller that needs pagination:
@@ -16,37 +16,25 @@ Add an include statement for the module into any controller that needs paginatio
 include NextPage::Pagination
 ```
 
-There are two ways to paginate: using a before filter or by calling `paginate_resource` explicitly.
+### Invoking Pagination
 
-### Before Filter
-Here's an example of using the before filter in a controller:
-
-```ruby
-before_action :apply_next_page_pagination, only: :index
-```
-
-This entry point uses the following conventions to apply pagination:
-- the name of the instance variable is the sames as the component (for example PhotosController -> @photos)
-- the name of the models is the controller name singularized (for example PhotosController -> Photo)
-
-Either can be overridden by calling method `paginate_with` in the controller. The two override options are
-`instance_variable_name` and `model_class`. For example, if the PhotosController used the model Picture and the
-instance variable name @photographs, the controller declares it as follows:
-
-```ruby
-paginate_with instance_variable_name: :photographs, model_class: 'Picture'
-```
-
-If the before filter is used, it will populate an instance variable. The action should NOT reset the variable, as
-that removes pagination.
-
-### Invoking Pagination Directly
 To paginate a resource pass the resource into method `paginate_resource` then store the return value back in the
 resource:
 
 ```ruby
 @photos = paginate_resource(@photos)
 ```
+
+The resource is decorated, so this should be the last step.
+
+### Default Limit
+
+The default size limit can be overridden by specifying a new default:
+
+```ruby
+@photos = paginate_resource(@photos, default_limit: 12)
+```
+
 
 ### Sorting
 Requests can specify sort order using the parameter `sort` with an attribute name or scope. Sorts can be prefixed with `+` or `-` to indicate ascending or descending. Multiple sorts can be specified either as a comma separated list or via bracket notation.
@@ -96,20 +84,6 @@ This allows the query parameter to be the following:
     sort=status
 
 
-### Default Limit
-The default size limit can be overridden with the `paginate_with` method for either type of paginagion. Pass option
-`default_limit` to specify an override:
-
-```ruby
-paginate_with default_limit: 25
-```
-
-All the options can be mixed and matches when calling `paginate_with`:
-
-```ruby
-paginate_with model_class: 'Photo', default_limit: 12
-paginate_with default_limit: 12, instance_variable_name: 'data'
-```
 
 ### Link Helpers
 This gem does not do any rendering. It does provide helper methods for generating links. The resource will include the following additional methods (when the request header Accept is `'application/vnd.api+json'`):

@@ -2,12 +2,10 @@
 
 class UniformsController < ApplicationController
   include NextPage::Pagination
-  before_action :apply_next_page_pagination, only: :index
-
-  paginate_with instance_variable_name: :unis, model_class: 'Jersey', default_limit: 8, default_sort: '-number'
 
   # GET /uniforms
   def index
+    @unis = paginate_resource(Jersey.all, default_limit: 8)
     render json: @unis
   end
 end

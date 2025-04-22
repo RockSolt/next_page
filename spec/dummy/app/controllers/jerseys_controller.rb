@@ -4,15 +4,22 @@ class JerseysController < ApplicationController
   before_action :authenticate_user, only: :index
   before_action :render_array, only: :index
   include NextPage::Pagination
-  before_action :apply_next_page_pagination, only: :index
 
   # GET /jerseys
   def index
-    @jerseys = @jerseys.home if params.dig(:filter, :home)
-    @jerseys = @jerseys.away if params.dig(:filter, :away)
+    jerseys =
+      if params.dig(:filter, :home)
+        Jersey.home
+      elsif params.dig(:filter, :away)
+        Jersey.away
+      else
+        Jersey.all
+      end
+
+    paginated_jerseys = paginate_resource(jerseys)
 
     # render with json_api to test the total_pages attribute
-    render json: @jerseys
+    render json: paginated_jerseys
   end
 
   # GET /jerseys/1
