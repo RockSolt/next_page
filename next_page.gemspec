@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary     = "Pagination for Rails Controllers"
   spec.description = "Provide basic pagination, including page size and number as well as helpers for generating links."
   spec.license     = "MIT"
+  spec.required_ruby_version = '>= 3.1.0'
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
