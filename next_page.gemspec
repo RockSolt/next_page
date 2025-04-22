@@ -13,17 +13,18 @@ Gem::Specification.new do |spec|
   spec.summary     = "Pagination for Rails Controllers"
   spec.description = "Provide basic pagination, including page size and number as well as helpers for generating links."
   spec.license     = "MIT"
+  spec.required_ruby_version = '>= 3.1.0'
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", '>= 6.1.7'
+  spec.add_dependency "rails", '>= 7.1.5'
 
   spec.add_development_dependency "appraisal", "~> 2.5.0"
-  spec.add_development_dependency "guard", "~> 2.18.0"
-  spec.add_development_dependency "guard-rspec", "~> 4.7.3"
-  spec.add_development_dependency "guard-rubocop", "~> 1.5.0"
+  spec.add_development_dependency "guard", "~> 2.19"
+  spec.add_development_dependency "guard-rspec", "~> 4.7"
+  spec.add_development_dependency "guard-rubocop", "~> 1.5"
   spec.add_development_dependency "pg", "~> 1.5.4"
-  spec.add_development_dependency "rspec-rails", "~> 5.1.2"
-  spec.add_development_dependency "rubocop", "~> 1.60.1"
-  spec.add_development_dependency "simplecov", "~> 0.18"
+  spec.add_development_dependency "rspec-rails", "~> 7.0"
+  spec.add_development_dependency "rubocop", "~> 1.75"
+  spec.add_development_dependency "simplecov", "~> 0.19"
 end
