@@ -10,7 +10,13 @@ module NextPage
     DEFAULT_LIMIT = 10
 
     def paginate_resource(data, params, default_limit)
-      assign_pagination_attributes(data, params, default_limit || DEFAULT_LIMIT)
+      default_limit ||= DEFAULT_LIMIT
+
+      assign_pagination_attributes(
+        data,
+        per_page: params[:size]&.to_i || default_limit,
+        current_page: params[:number]&.to_i || 1
+      )
 
       data.limit(data.per_page).offset((data.current_page - 1) * data.per_page)
     end
@@ -25,27 +31,11 @@ module NextPage
 
     private
 
-    def assign_pagination_attributes(data, params, default_limit)
+    def assign_pagination_attributes(data, per_page:, current_page:)
       data.extend(NextPage::PaginationAttributes)
 
-      data.per_page = page_size(params[:page], default_limit)
-      data.current_page = page_number(params[:page])
-    end
-
-    def page_size(page, default_limit)
-      if page.present? && page[:size].present?
-        page[:size]&.to_i
-      else
-        default_limit
-      end
-    end
-
-    def page_number(page)
-      if page.present? && page[:number].present?
-        page[:number]&.to_i
-      else
-        1
-      end
+      data.per_page = per_page
+      data.current_page = current_page
     end
   end
 end

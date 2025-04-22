@@ -24,7 +24,7 @@ module NextPage
     end
 
     def paginate_resource(resource, default_limit: nil)
-      self.class.next_page_paginator.paginate_resource(resource, params.slice(:page, :sort), default_limit)
+      self.class.next_page_paginator.paginate_resource(resource, params.fetch(:page, {}), default_limit)
     end
 
     def render(*args) # :nodoc:

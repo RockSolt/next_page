@@ -27,63 +27,13 @@ resource:
 
 The resource is decorated, so this should be the last step.
 
-### Default Limit
+### Default Results per Page
 
-The default size limit can be overridden by specifying a new default:
+The default number of results per page can be overridden by specifying a new default with the call:
 
 ```ruby
-@photos = paginate_resource(@photos, default_limit: 12)
+@photos = paginate_resource(@photos, default_limit: 25)
 ```
-
-
-### Sorting
-Requests can specify sort order using the parameter `sort` with an attribute name or scope. Sorts can be prefixed with `+` or `-` to indicate ascending or descending. Multiple sorts can be specified either as a comma separated list or via bracket notation.
-
-    /photos?sort=-created_at
-    /photos?sort=location,-created_by
-    /photos?sort[]=location&photos[]=-created_by
-
-The default sort order is primary key descending. It can be overridden by using the `default_sort` option of `paginate_with`. Use a string formatted just as url parameter would be formatted.
-
-```ruby
-paginate_with default_sort: '-created_at'
-```
-
-#### Nested Sorts
-
-Nested attributes and scopes can be indicated by providing the association names separated by periods.
-
-    /photos?sort=user.name
-    /photos?sort=-user.address.state
-
-#### Directional Scope Sorts
-
-In order to use directions (`+` or `-`) with a scope, the scope must be defined as a class method and take a single parameter. The scope will receive either `'asc'` or `'desc'`. Here is an example of a valid directional scope.
-
-```ruby
-def self.status(direction)
-  order("CASE status WHEN 'new' THEN 1 WHEN 'in progress' THEN 2 ELSE 3 END #{direction}")
-end
-```
-
-#### Scope Prefix / Suffix
-
-In order to keep the peace between frontend and backend developers, scope names can include a prefix or suffix that the front end can ignore. For example, given a scope that sorts on a derived attribute (such as status in the _Direction Scope Sorts_ example), the backend developer might prefer to name the scope status_sort or sort_by_status, as a class method that shares the same name as an attribute might be unclear. However, the frontend developer does not want a query parameter that says <tt>sort=sort_by_status</tt>; it is an exception because it doesn't match the name of the attribute (and it's not pretty).
-
-The configuration allows a prefix and or suffix to be specified. If either is specified, then in addition to looking for a scope that matches the parameter name, it will also look for a scope that matches the prefixed and/or suffixed name. Prefixes are defined by configuration option <tt>sort_scope_prefix</tt> and suffixes are defined by <tt>sort_scope_suffix</tt>.
-
-For example, if the backend developer prefers <tt>sort_by_status</tt> then the following configuration can be used:
-
-```ruby
-NextPage.configure do |config|
-  config.sort_scope_prefix = 'sort_by_'
-end
-``` 
-This allows the query parameter to be the following:
-
-    sort=status
-
-
 
 ### Link Helpers
 This gem does not do any rendering. It does provide helper methods for generating links. The resource will include the following additional methods (when the request header Accept is `'application/vnd.api+json'`):
@@ -97,6 +47,26 @@ In some cases (such as grouping), calling count on the query does not provide an
 - provide a count_query that can resolve the attributes
 - specify the following attributes manually: current_page, total_count, and per_page
 
+
+## Configuration
+
+There is one configuration option: `per_page`.
+
+The option can be set directly...
+
+`NextPage.configuration.per_page = 25`
+
+...or the configuration can be yielded:
+
+```
+NextPage.configure do |config|
+  config.per_page = 25
+end
+```
+
+**Results per Page**
+
+If not specified in the configuration, the default value for results per page is 12.
 
 ## Installation
 Add this line to your application's Gemfile:

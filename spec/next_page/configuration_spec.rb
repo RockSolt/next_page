@@ -5,35 +5,19 @@ require 'rails_helper'
 RSpec.describe NextPage::Configuration do
   let(:config) { described_class.new }
 
-  it '#scope_sort_prefix= converts to string' do
-    config.sort_scope_prefix = :sort_by_
-    expect(config.sort_scope_prefix).to eq 'sort_by_'
+  it 'returns 12 when no default_per_page is set' do
+    expect(NextPage.configuration.default_per_page).to eq 12
   end
 
-  context '#scope_sort_prefix?' do
-    it 'false by default' do
-      expect(config.sort_scope_prefix?).to be false
-    end
-
-    it 'true when populated' do
-      config.sort_scope_prefix = 'sort_by_'
-      expect(config.sort_scope_prefix?).to be true
-    end
+  it 'allows setting a custom default_per_page' do
+    NextPage.configuration.default_per_page = 20
+    expect(NextPage.configuration.default_per_page).to eq 20
   end
 
-  it '#scope_sort_suffix= converts to string' do
-    config.sort_scope_suffix = :_sort
-    expect(config.sort_scope_suffix).to eq '_sort'
-  end
-
-  context '#scope_sort_suffix?' do
-    it 'false by default' do
-      expect(config.sort_scope_suffix?).to be false
+  it 'allows setting a custom default_per_page through the block' do
+    NextPage.configure do |config|
+      config.default_per_page = 30
     end
-
-    it 'true when populated' do
-      config.sort_scope_suffix = '_sort'
-      expect(config.sort_scope_suffix?).to be true
-    end
+    expect(NextPage.configuration.default_per_page).to eq 30
   end
 end
