@@ -26,14 +26,5 @@ module NextPage
     def paginate_resource(resource, default_limit: nil)
       self.class.next_page_paginator.paginate_resource(resource, params.fetch(:page, {}), default_limit)
     end
-
-    def render(*args) # :nodoc:
-      return super unless action_name == 'index' && request.headers[:Accept] == 'application/vnd.api+json'
-
-      self.class.next_page_paginator.decorate_meta!(args.first)
-      super
-    rescue StandardError
-      super
-    end
   end
 end

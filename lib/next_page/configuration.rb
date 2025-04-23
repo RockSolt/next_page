@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module NextPage
-  # = Configuration
+  # # Configuration
   #
   # Class Configuration stores the following settings:
   # - default_per_page
