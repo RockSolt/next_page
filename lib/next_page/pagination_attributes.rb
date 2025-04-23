@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 module NextPage
-  # = Pagination Attributes
+  # # Pagination Attributes
   #
-  # Module PaginationAttributes adds in methods required for pagination links: previous_page, current_page, next_page,
+  # Module PaginationAttributes adds in methods to help with pagination links: previous_page, current_page, next_page,
   # and total_pages. It reads the offset and limit on the query to determine the values.
   #
   # In some cases the query will not support count. In that case, there are two ways to override the default behavior:
   # - provide a count_query that can resolve the attributes
   # - specify the following attributes manually: current_page, total_count, and per_page
+  #
+  # These can be completed after the call to `paginate_resource`.
   module PaginationAttributes
     attr_writer :count_query, :current_page, :total_count, :per_page
 
