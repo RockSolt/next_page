@@ -7,10 +7,8 @@ module NextPage
   # request, then applies a limit and offset to the query based upon the parameters or the defaults. It also extends
   # the resource with the NextPage::PaginationAttributes mixin.
   class Paginator
-    DEFAULT_LIMIT = 10
-
     def paginate_resource(data, params, default_limit)
-      default_limit ||= DEFAULT_LIMIT
+      default_limit ||= NextPage.configuration.default_per_page
 
       assign_pagination_attributes(
         data,

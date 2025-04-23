@@ -13,7 +13,13 @@ RSpec.describe JerseysController, type: :controller do
 
     it 'returns the default limit' do
       get :index, params: {}
-      expect(JSON.parse(response.body).size).to eq NextPage::Paginator::DEFAULT_LIMIT
+      expect(JSON.parse(response.body).size).to eq NextPage.configuration.default_per_page
+    end
+
+    it 'uses the default limit from config' do
+      NextPage.configuration.default_per_page = 8
+      get :index, params: {}
+      expect(JSON.parse(response.body).size).to eq 8
     end
 
     it 'with size: 5' do
