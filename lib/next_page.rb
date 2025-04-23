@@ -7,10 +7,6 @@ require 'next_page/paginator'
 
 # = Next Page
 module NextPage
-  class << self
-    attr_writer :configuration
-  end
-
   def self.configuration
     @configuration ||= Configuration.new
   end
