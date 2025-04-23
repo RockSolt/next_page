@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class JerseysController < ApplicationController
-  before_action :authenticate_user, only: :index
-  before_action :render_array, only: :index
   include NextPage::Pagination
 
   # GET /jerseys
@@ -16,20 +14,5 @@ class JerseysController < ApplicationController
   def show
     @jersey = Jersey.find(params[:id])
     render json: @jersey
-  end
-
-  private
-
-  # example of rendering a non-ActiveRecord
-  def authenticate_user
-    return unless params.fetch('throw_auth_error', false) == 'true'
-
-    render json: { error: 'not authorized', status: 401 }.as_json
-  end
-
-  def render_array
-    return unless params.fetch('contrived_array_example', false) == 'true'
-
-    render json: [1, 2, 3]
   end
 end
