@@ -1,13 +1,14 @@
-version: '3'
+version: "3"
 services:
   db:
     container_name: next_page_db
-    image: postgres:10.7
+    image: postgres:17
     environment:
       - POSTGRES_USER=next_page
       - POSTGRES_DB=next_page
+      - POSTGRES_PASSWORD=GoBears!
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - next_page_postgres_data:/var/lib/postgresql/data
 
