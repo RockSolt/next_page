@@ -8,11 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: ['3.2', '3.3', '3.4']
+        ruby: ["3.2", "3.3", "3.4", "4.0"]
         gemfile:
           - rails_7_1
           - rails_7_2
           - rails_8_0
+          - rails_8_1
 
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
@@ -25,7 +26,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: test
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
 
     steps:
       - uses: actions/checkout@master
