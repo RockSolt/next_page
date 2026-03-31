@@ -144,7 +144,6 @@ GEM
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
-    pg (1.6.3)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -239,6 +238,9 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
+    sqlite3 (2.9.2)
+      mini_portile2 (~> 2.8.0)
+    sqlite3 (2.9.2-arm64-darwin)
     stringio (3.2.0)
     thor (1.5.0)
     timeout (0.6.1)
@@ -257,15 +259,16 @@ GEM
     zeitwerk (2.7.5)
 
 PLATFORMS
+  arm64-darwin-25
   ruby
 
 DEPENDENCIES
   appraisal (~> 2.5.0)
   next_page!
-  pg (~> 1.6)
   rspec-rails (~> 8.0)
   rubocop (~> 1.75)
   simplecov (~> 0.19)
+  sqlite3 (~> 2.1)
 
 BUNDLED WITH
   4.0.8

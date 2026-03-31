@@ -144,7 +144,7 @@ is also used manually to assess the codeline.
 
 ### Running Tests
 
-Tests are written in RSpec and the dummy app uses a docker database. 
+Tests are written in RSpec and the dummy app uses a sqlite database.
 
 The tests can also be run across all the ruby and Rails combinations using appraisal. The install is a one-time step.
 

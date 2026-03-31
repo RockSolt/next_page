@@ -18,15 +18,6 @@ jobs:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
       BUNDLE_PATH_RELATIVE_TO_CWD: true
 
-    services:
-      db:
-        image: postgres:12
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: test
-        ports: ["5432:5432"]
-
     steps:
       - uses: actions/checkout@v6
 
@@ -39,6 +30,5 @@ jobs:
 
       - name: RSpec
         env:
-          DATABASE_URL: postgres://postgres:password@localhost:5432/test
           RAILS_ENV: test
         run: bundle exec rspec --format progress
