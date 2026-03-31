@@ -1,5 +1,3 @@
-$:.push File.expand_path("lib", __dir__)
-
 # Maintain your gem's version:
 require "next_page/version"
 
@@ -15,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
   spec.required_ruby_version = '>= 3.1.0'
 
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "rails", '>= 7.1.5'
 
