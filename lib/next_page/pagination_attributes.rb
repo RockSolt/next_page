@@ -12,7 +12,15 @@ module NextPage
   #
   # These can be completed after the call to `paginate_resource`.
   module PaginationAttributes
-    attr_writer :count_query, :current_page, :total_count, :per_page
+    attr_writer :count_query, :total_count
+
+    def current_page=(value)
+      @current_page = [value.to_i, 1].max
+    end
+
+    def per_page=(value)
+      @per_page = [value.to_i, 1].max
+    end
 
     def previous_page
       current_page > 1 ? current_page - 1 : nil
