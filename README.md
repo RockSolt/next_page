@@ -34,7 +34,7 @@ end
 
 ## Getting Started
 
-This gem requires Rails 7.1+ and works with ActiveRecord.
+This gem requires Rails 7.2+ and works with ActiveRecord.
 
 ### Installation
 

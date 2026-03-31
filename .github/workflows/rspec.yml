@@ -10,7 +10,6 @@ jobs:
       matrix:
         ruby: ["3.2", "3.3", "3.4", "4.0"]
         gemfile:
-          - rails_7_1
           - rails_7_2
           - rails_8_0
           - rails_8_1
