@@ -77,4 +77,32 @@ RSpec.describe NextPage::PaginationAttributes do
       expect(instance.total_pages).to eq 31
     end
   end
+
+  context 'with invalid current_page' do
+    let(:relation) { Jersey.limit(5) }
+
+    it 'returns 1 when set to 0' do
+      instance.current_page = 0
+      expect(instance.current_page).to eq 1
+    end
+
+    it 'returns 1 when set to a negative number' do
+      instance.current_page = -3
+      expect(instance.current_page).to eq 1
+    end
+  end
+
+  context 'with invalid per_page' do
+    let(:relation) { Jersey.limit(5) }
+
+    it 'returns 1 when set to 0' do
+      instance.per_page = 0
+      expect(instance.per_page).to eq 1
+    end
+
+    it 'returns 1 when set to a negative number' do
+      instance.per_page = -3
+      expect(instance.per_page).to eq 1
+    end
+  end
 end
