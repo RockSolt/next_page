@@ -1,5 +1,5 @@
 # Maintain your gem's version:
-require "next_page/version"
+require_relative "lib/next_page/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
