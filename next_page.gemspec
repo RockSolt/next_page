@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", '>= 7.2'
 
   spec.add_development_dependency "appraisal", "~> 2.5.0"
-  spec.add_development_dependency "pg", "~> 1.5.4"
-  spec.add_development_dependency "rspec-rails", "~> 7.0"
+  spec.add_development_dependency "pg", "~> 1.6"
+  spec.add_development_dependency "rspec-rails", "~> 8.0"
   spec.add_development_dependency "rubocop", "~> 1.75"
   spec.add_development_dependency "simplecov", "~> 0.19"
 end
