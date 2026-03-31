@@ -17,9 +17,12 @@ RSpec.describe JerseysController, type: :controller do
     end
 
     it 'uses the default limit from config' do
+      original = NextPage.configuration.default_per_page
       NextPage.configuration.default_per_page = 8
       get :index, params: {}
       expect(JSON.parse(response.body).size).to eq 8
+    ensure
+      NextPage.configuration.default_per_page = original
     end
 
     it 'with size: 5' do
