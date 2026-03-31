@@ -27,7 +27,7 @@ module NextPage
     end
 
     def current_page
-      @current_page ||= (count_query.offset_value || 0) + 1
+      @current_page ||= 1
     end
 
     def next_page
