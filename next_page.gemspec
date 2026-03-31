@@ -18,9 +18,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rails", '>= 7.2'
 
   spec.add_development_dependency "appraisal", "~> 2.5.0"
-  spec.add_development_dependency "guard", "~> 2.19"
-  spec.add_development_dependency "guard-rspec", "~> 4.7"
-  spec.add_development_dependency "guard-rubocop", "~> 1.5"
   spec.add_development_dependency "pg", "~> 1.5.4"
   spec.add_development_dependency "rspec-rails", "~> 7.0"
   spec.add_development_dependency "rubocop", "~> 1.75"
