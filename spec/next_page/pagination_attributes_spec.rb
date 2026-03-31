@@ -7,7 +7,7 @@ RSpec.describe NextPage::PaginationAttributes do
 
   let(:instance) { relation.tap { |cp| cp.extend(described_class) } }
 
-  context 'with limit 5' do
+  context 'with limit 6' do
     let(:relation) { Jersey.limit(6) }
 
     it '#previous_page' do
