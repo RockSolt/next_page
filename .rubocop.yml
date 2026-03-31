@@ -7,24 +7,24 @@ inherit_mode:
 Layout/LineLength:
   Max: 120
 Metrics/BlockLength:
-  AllowedMethods: ['describe', 'context']
+  AllowedMethods: ["describe", "context"]
   Exclude:
-    - 'Guardfile'
+    - "Guardfile"
 Style/FrozenStringLiteralComment:
   Exclude:
-    - 'spec/dummy/db/**/*'
+    - "spec/dummy/db/**/*"
 Style/HashSyntax:
   EnforcedShorthandSyntax: either
 
 AllCops:
-  TargetRubyVersion: 3.2.2
+  TargetRubyVersion: 3.2
   NewCops: enable
   Exclude:
-    - 'next_page.gemspec'
-    - 'gemfiles/*'
-    - 'Rakefile'
-    - 'lib/next_page/version.rb'
-    - 'bin/test'
-    - 'spec/dummy/bin/*'
-    - 'spec/dummy/Rakefile'
-    - 'spec/dummy/db/schema.rb'
+    - "next_page.gemspec"
+    - "gemfiles/*"
+    - "Rakefile"
+    - "lib/next_page/version.rb"
+    - "bin/test"
+    - "spec/dummy/bin/*"
+    - "spec/dummy/Rakefile"
+    - "spec/dummy/db/schema.rb"
