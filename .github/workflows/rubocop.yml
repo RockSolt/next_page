@@ -6,14 +6,14 @@ jobs:
   rubocop:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v6
       - name: Set up Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2
       - name: Install RuboCop
         run: |
-          gem install bundler --no-document
-          gem install rubocop -v 1.60.1 --no-document
+          version=$(grep -m1 "^    rubocop (" Gemfile.lock | sed "s/.*(\(.*\))/\1/")
+          gem install rubocop -v "$version" --no-document
       - name: RuboCop
         run: rubocop
