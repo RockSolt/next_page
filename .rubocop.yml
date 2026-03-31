@@ -8,8 +8,6 @@ Layout/LineLength:
   Max: 120
 Metrics/BlockLength:
   AllowedMethods: ["describe", "context"]
-  Exclude:
-    - "Guardfile"
 Style/FrozenStringLiteralComment:
   Exclude:
     - "spec/dummy/db/**/*"
