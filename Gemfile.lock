@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     next_page (1.0.0)
-      rails (>= 7.2)
+      activerecord (>= 7.2)
 
 GEM
   remote: https://rubygems.org/
@@ -265,6 +265,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal (~> 2.5.0)
   next_page!
+  rails (>= 7.2)
   rspec-rails (~> 8.0)
   rubocop (~> 1.75)
   simplecov (~> 0.19)
