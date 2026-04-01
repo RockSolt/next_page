@@ -23,6 +23,18 @@ RSpec.describe NextPage::PaginationAttributes do
     end
   end
 
+  context 'with limit > total pages' do
+    let(:relation) { Jersey.limit(1_000) }
+
+    it '#total_pages' do
+      expect(instance.total_pages).to eq 1
+    end
+
+    it '#next_page' do
+      expect(instance.next_page).to be_nil
+    end
+  end
+
   context 'with count_query' do
     let(:relation) { Jersey.offset(3).limit(5) }
     before { instance.count_query = Jersey.limit(6) }
@@ -43,6 +55,10 @@ RSpec.describe NextPage::PaginationAttributes do
       instance.current_page = 10
       instance.total_count = 123
       instance.per_page = 4
+    end
+
+    it '#previous_page' do
+      expect(instance.previous_page).to eq 9
     end
 
     it '#current_page' do
