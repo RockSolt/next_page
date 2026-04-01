@@ -1,15 +1,12 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  user: next_page
-  host: localhost
-  password: GoBears!
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
   <<: *default
-  database: next_page
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  database: next_page_test
+  database: db/test.sqlite3
