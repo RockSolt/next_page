@@ -15,6 +15,8 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 
+  spec.metadata["rubygems_mfa_required"] = "true"
+
   spec.add_dependency "activerecord", '>= 7.2'
 
   spec.add_development_dependency "rails", '>= 7.2'
